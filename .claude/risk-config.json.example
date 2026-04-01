@@ -1,0 +1,7 @@
+{
+  "version": "1.0",
+  "pagerduty": {
+    "serviceId": "<your-service-id>",
+    "serviceName": "<your-service-name>"
+  }
+}

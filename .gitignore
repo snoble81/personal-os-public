@@ -1,0 +1,88 @@
+# PersonalOS .gitignore
+# System files (CLAUDE.md, skills, core, examples) are committed.
+# Personal/company data stays local.
+
+# === PERSONAL DATA (local only) ===
+
+# Task files (contain work-specific action items)
+Tasks/*.md
+Tasks/archive/
+!Tasks/.gitkeep
+!Tasks/README.md
+
+# Knowledge base (company meetings, projects, emails)
+Knowledge/
+!Knowledge/.gitkeep
+
+# Documents (company-specific generated docs)
+Documents/
+!Documents/personal-os-narrative.md
+
+# Personal config
+GOALS.md
+BACKLOG.md
+TASKS.md
+INDEX.md
+
+# Sensitive materials
+sensitive/
+Knowledge/sensitive/
+
+# Company files (PDFs, CSVs, screenshots, presentations)
+*.pdf
+*.csv
+*.png
+*.jpg
+*.pptx
+
+# Granola import state
+.granola_last_import
+
+# === SYSTEM / DEV (always ignore) ===
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+.env
+
+# IDE & Editor
+.vscode/
+.idea/
+.obsidian/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test
+src/failover/
+test_*.py
+*.test.py
+.pytest_cache/
+.coverage
+
+# Tool-specific
+.specstory/
+.factory/
+
+# Logs
+*.log
+logs/
+
+# MCP/System
+.mcp_cache/
+.mcp.json
+*.pid
+*.lock
+
+# Temp files
+Untitled
+Untitled.md
+"Untitled 1.md"
+temp-*
+cursor-plugin/
