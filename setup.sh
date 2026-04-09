@@ -75,7 +75,7 @@ read -p "Press Enter to begin..."
 # Create directories
 print_header "Creating Workspace"
 
-for dir in "Tasks" "Knowledge"; do
+for dir in "Tasks" "Knowledge" "Knowledge/meetings" "Knowledge/meetings/recurring" "Knowledge/misc" "Documents"; do
     if [ -d "$dir" ]; then
         print_info "Directory exists: $dir/"
     else
@@ -83,6 +83,44 @@ for dir in "Tasks" "Knowledge"; do
         print_success "Created: $dir/"
     fi
 done
+
+# Create hot cache template
+if [ ! -f "Knowledge/HOT.md" ]; then
+    cat > "Knowledge/HOT.md" << 'HOTEOF'
+# Hot Cache
+
+> Compact summary of active state for fast context loading. Refreshed during weekly sync or on demand.
+> **Last refreshed: YYYY-MM-DD**
+
+## Who I Am
+
+(Your role, team, and current focus -- fill this in after setup)
+
+## Active Initiatives
+
+1. **Initiative 1** -- status, key details, owner
+2. **Initiative 2** -- status, key details, owner
+
+## Key People
+
+- **Name** -- role/relationship. Current context.
+
+## Key Dates
+
+- **YYYY-MM-DD** -- what's happening
+
+## Recent Decisions
+
+- Decision description (source, date)
+
+## Current Blockers
+
+- What's stuck and why
+HOTEOF
+    print_success "Created: Knowledge/HOT.md (template -- fill in after setup)"
+else
+    print_info "File exists: Knowledge/HOT.md"
+fi
 
 # Copy template files
 print_header "Setting Up Templates"

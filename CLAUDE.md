@@ -9,7 +9,8 @@ This is **PersonalOS**, an AI-powered task management system. The primary conten
 ## Repository Structure
 
 - `Tasks/` -- Task files organized by fiscal quarter (e.g., `Tasks/FY27-Q1/`). Complex tasks with dedicated documents get subfolders (`task.md` + `META.md` + related docs). Simple tasks are flat `.md` files in the quarter folder. See `/task-hygiene` skill for full hierarchy spec.
-- `Knowledge/meetings/` -- Meeting notes. Chronological archive in `YYYY-MM/` folders. Recurring series in `recurring/` with META.md per series tracking active topics and linked tasks.
+- `Knowledge/meetings/` -- Meeting notes. Chronological archive in `YYYY-MM/` folders. Recurring series in `recurring/` with META.md per series tracking active topics and linked tasks. `WIKI-INDEX.md` maps entities (people, projects, tools) to meetings.
+- `Knowledge/HOT.md` -- **Hot cache**: compact (~500 word) summary of active state for fast context loading. Read this first when you need quick context instead of crawling multiple files. Refreshed during weekly sync.
 - `Knowledge/projects/` -- Legacy reference material (PRDs, specs, external inputs). **Do not create new files here.** Save external inputs and working documents directly into the relevant task subfolder instead.
 - `Documents/` -- Personal/career docs only (self-reviews, interview prep, people feedback, system narrative). All task-related documents go into task subfolders. `Documents/archive/` holds stale docs from completed work.
 - `BACKLOG.md` -- Raw capture inbox (unstructured notes)
@@ -60,7 +61,7 @@ The `MANAGER_AI_BASE_DIR` environment variable controls the MCP server's working
 7. Present a concise summary, then clear `BACKLOG.md`
 
 ### Daily Guidance ("What should I work on?")
-1. Check priorities, statuses, and goal alignment against `GOALS.md`
+1. Read `Knowledge/HOT.md` for current state (if it exists), then check priorities and goal alignment against `GOALS.md`
 2. Suggest max 3 focus tasks
 3. Flag blocked tasks and propose next steps
 4. Time-based suggestions: morning for outreach/communication, afternoon for deep work (specs, analysis), end of day for admin/planning
@@ -71,7 +72,13 @@ Read and follow the workflow file when triggered:
 - `examples/workflows/backlog-processing.md` -- Backlog flow reference
 
 ### Weekly Sync (Monday mornings)
-Run `/sync-offsite-tracker` to import meetings, sync tracker, update task files, and refresh `Tasks/TODO.md` (the master to-do list). Then run `/ai-pm-weekly` for speed round bullets. See `Documents/personal-os-narrative.md` for the full system description.
+Run your weekly sync skill to import meetings, sync trackers, update task files, and refresh `Tasks/TODO.md` (the master to-do list). This should also refresh `Knowledge/HOT.md`, rebuild `INDEX.md`, and update the meeting wiki index. Optionally run `/lint` to catch any issues. See `Documents/personal-os-narrative.md` for the full system description.
+
+### Knowledge Management
+- **Hot cache** (`Knowledge/HOT.md`): Read this first for quick context on active state. Refreshed during weekly sync or on demand. Keep it under 500 words.
+- **Meeting wiki** (`Knowledge/meetings/WIKI-INDEX.md`): Entity-to-meeting reverse index. Run `/build-meeting-wiki` to rebuild or `/build-meeting-wiki incremental` to update with new meetings only.
+- **Document index** (`INDEX.md`): Master catalog of all documents. Run `/rebuild-index` to regenerate.
+- **Health checks**: Run `/lint` to scan for stale indexes, broken links, inconsistent decisions, and aging tasks. Use `/lint fix` to auto-fix safe issues.
 
 ## Task File Format
 

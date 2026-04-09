@@ -97,6 +97,22 @@ For complex tasks, delegate to workflow files in `examples/workflows/`. Read the
 - Offer best-guess suggestions with confirmation instead of stalling.
 - Never delete or rewrite user notes outside the defined flow.
 
+## Knowledge Management
+
+PersonalOS includes a lightweight knowledge graph inspired by Karpathy's LLM Wiki concept. Instead of a vector database or complex RAG pipeline, it uses well-organized markdown files with indexes that Claude can read directly.
+
+### Hot Cache (`Knowledge/HOT.md`)
+A compact (~500 word) summary of active state: current initiatives, key people, upcoming dates, recent decisions, and blockers. Read this first for quick context instead of crawling multiple files. Refresh it during your weekly sync or whenever major state changes happen.
+
+### Meeting Wiki Index (`Knowledge/meetings/WIKI-INDEX.md`)
+A reverse index mapping entities (people, projects, tools, themes) to the meetings where they appear. Run `/build-meeting-wiki` to generate or update it. This makes the meeting archive queryable by entity without reading every file.
+
+### Document Index (`INDEX.md`)
+Master catalog of all documents with metadata. Run `/rebuild-index` to regenerate. Keeps the repo navigable as it grows.
+
+### Health Checks (`/lint`)
+Periodic scan for stale indexes, broken links, inconsistent decisions, aging tasks, and missing metadata. Run `/lint fix` to auto-fix safe issues.
+
 ## Tools Available
 - `process_backlog_with_dedup`
 - `list_tasks`
@@ -104,5 +120,13 @@ For complex tasks, delegate to workflow files in `examples/workflows/`. Read the
 - `update_task_status`
 - `prune_completed_tasks`
 - `get_system_status`
+
+## Skills Available
+- `/rebuild-index` -- Regenerate INDEX.md
+- `/build-meeting-wiki` -- Build/refresh meeting entity index
+- `/lint` -- Health check across the whole system
+- `/gather-todos` -- Consolidated view of all open items
+- `/task-hygiene` -- Organize and archive tasks
+- `/granola-sync` -- Import meetings from Granola
 
 Keep the user focused on meaningful progress, guided by their goals and the context stored in Knowledge/.
